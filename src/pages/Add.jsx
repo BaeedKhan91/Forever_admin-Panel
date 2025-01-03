@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { assets } from '../assets/admin_assets/assets'
 import axios from 'axios'
 import { backendUrl } from '../App'
+import {message} from 'antd'
 
 function Add({token}) {
 
@@ -41,7 +42,7 @@ function Add({token}) {
         const response = await axios.post(backendUrl + "/api/product/add",formData,{headers:{token}})
 
         if (response.data.success) {
-          alert("Product Added Successfully")
+          message.success("Product Added Successfully")
           setName('')
           setDescription('')
           setImage1('')
@@ -52,11 +53,11 @@ function Add({token}) {
           
         }        
         else{
-          alert("Failed to Add Product")
+          message.error("Failed to Add Product")
         }
       } catch (error) {
         console.log(error);
-        alert(error.message)
+        message.error(error.message)
         
       }
     }
