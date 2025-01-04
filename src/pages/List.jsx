@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { backendUrl, currency } from '../App';
-import { message } from 'antd';
+import { message, Popconfirm } from 'antd';
 
 function List({token}) {
 
@@ -71,7 +71,18 @@ function List({token}) {
             <p>{item.name}</p>
             <p>{item.category}</p>
             <p>{currency}{item.price}</p>
-            <p onClick={()=>removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
+            <Popconfirm
+              title="Delete the product"
+              description="Are you sure you want to delete this product?"
+              onConfirm={() => removeProduct(item._id)}
+              onCancel={''}
+              okText="Yes"
+              cancelText="No"
+            >
+              <p className='text-right md:text-center cursor-pointer text-lg'>
+                X
+              </p>
+            </Popconfirm>
           </div>
         ))
       }
